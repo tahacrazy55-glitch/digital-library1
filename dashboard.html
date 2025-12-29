@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>مكتبة رقمية | لوحة التحكم</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">📚</div>
+      <div>
+        <div class="brand-title">مكتبة رقمية</div>
+        <div class="brand-sub">نظام إدارة مكتبة الكتب الرقمية</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="catalog.html">الكتالوج</a>
+      <a class="active" href="dashboard.html">لوحة التحكم</a>
+      <a href="about.html">عن النظام</a>
+    </nav>
+
+    <div class="actions">
+      <button id="themeBtn" class="btn ghost" type="button">🌙</button>
+      <button id="resetBtn" class="btn danger" type="button">إعادة ضبط</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <div class="section-head">
+        <h2>لوحة التحكم</h2>
+        <p>إضافة/تعديل/حذف الكتب + إحصائيات + سجل العمليات.</p>
+      </div>
+
+      <div class="dash">
+        <div class="card">
+          <h3>إحصائيات</h3>
+          <div class="kpis" id="kpis"></div>
+
+          <h3 class="mt">سجل العمليات</h3>
+          <div class="log" id="log"></div>
+
+          <div class="row mt">
+            <button id="exportBtn" class="btn" type="button">تصدير JSON</button>
+            <label class="btn ghost filelike">
+              استيراد JSON
+              <input id="importInput" type="file" accept="application/json" hidden />
+            </label>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="formTitle">إضافة كتاب جديد</h3>
+
+          <form id="bookForm" class="form">
+            <input type="hidden" id="bookId" />
+
+            <div class="field">
+              <label>العنوان</label>
+              <input id="title" required placeholder="مثال: مقدمة ابن خلدون" />
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label>المؤلف</label>
+                <input id="author" required placeholder="مثال: ابن خلدون" />
+              </div>
+              <div class="field">
+                <label>سنة النشر</label>
+                <input id="year" type="number" min="0" max="2100" required placeholder="مثال: 1377" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label>التصنيف</label>
+                <input id="category" required placeholder="مثال: تاريخ" />
+              </div>
+              <div class="field">
+                <label>عدد النسخ</label>
+                <input id="copies" type="number" min="1" max="999" required value="3" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label>وصف مختصر</label>
+              <textarea id="description" rows="3" placeholder="وصف موجز عن الكتاب..."></textarea>
+            </div>
+
+            <div class="row">
+              <button class="btn primary" type="submit">حفظ</button>
+              <button id="cancelEditBtn" class="btn ghost" type="button" hidden>إلغاء التعديل</button>
+            </div>
+          </form>
+
+          <h3 class="mt">قائمة الإدارة</h3>
+          <div id="adminList" class="adminList"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <footer class="footer">© مكتبة رقمية — لوحة التحكم</footer>
+  <script src="app.js"></script>
+</body>
+</html>
